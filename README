@@ -1,157 +1,339 @@
-SUMMARY & USAGE LICENSE
-=============================================
+# Movie Recommendation System: KNN vs Decision Tree Regressor
 
-MovieLens data sets were collected by the GroupLens Research Project
-at the University of Minnesota.
- 
-This data set consists of:
-	* 100,000 ratings (1-5) from 943 users on 1682 movies. 
-	* Each user has rated at least 20 movies. 
-        * Simple demographic info for the users (age, gender, occupation, zip)
+[![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Dataset](https://img.shields.io/badge/dataset-MovieLens%20100K-orange.svg)](https://grouplens.org/datasets/movielens/)
 
-The data was collected through the MovieLens web site
-(movielens.umn.edu) during the seven-month period from September 19th, 
-1997 through April 22nd, 1998. This data has been cleaned up - users
-who had less than 20 ratings or did not have complete demographic
-information were removed from this data set. Detailed descriptions of
-the data file can be found at the end of this file.
+Sistem rekomendasi film sederhana yang membandingkan performa algoritma **K-Nearest Neighbors (KNN)** dan **Decision Tree Regressor** menggunakan dataset MovieLens 100K.
 
-Neither the University of Minnesota nor any of the researchers
-involved can guarantee the correctness of the data, its suitability
-for any particular purpose, or the validity of results based on the
-use of the data set.  The data set may be used for any research
-purposes under the following conditions:
+## 📋 Deskripsi
 
-     * The user may not state or imply any endorsement from the
-       University of Minnesota or the GroupLens Research Group.
+Penelitian ini mengimplementasikan dan membandingkan dua algoritma machine learning klasik untuk sistem rekomendasi film:
+- **K-Nearest Neighbors (KNN)** dengan user-based collaborative filtering
+- **Decision Tree Regressor** dengan feature engineering
 
-     * The user must acknowledge the use of the data set in
-       publications resulting from the use of the data set
-       (see below for citation information).
+### Hasil Utama
+- **Decision Tree Regressor** mengungguli KNN pada 5 dari 6 metrik evaluasi
+- RMSE: **0.9416** (DT) vs **0.9565** (KNN)
+- F1-Score: **0.5371** (DT) vs **0.4929** (KNN)
+- Feature aggregate rating berkontribusi **91.56%** terhadap akurasi prediksi
 
-     * The user may not redistribute the data without separate
-       permission.
+## 🎯 Fitur
 
-     * The user may not use this information for any commercial or
-       revenue-bearing purposes without first obtaining permission
-       from a faculty member of the GroupLens Research Project at the
-       University of Minnesota.
+- ✅ Implementasi KNN dengan hyperparameter optimization
+- ✅ Implementasi Decision Tree Regressor dengan pruning
+- ✅ Feature engineering komprehensif (27 fitur)
+- ✅ Evaluasi menggunakan 6 metrik (Precision, Recall, F1-Score, RMSE, MAE, Training Time)
+- ✅ Visualisasi hasil (confusion matrix, learning curves, feature importance)
+- ✅ Grid Search Cross-Validation untuk optimasi parameter
+- ✅ Prototipe web application dengan Flask
 
-If you have any further questions or comments, please contact GroupLens
-<grouplens-info@cs.umn.edu>. 
+## 🗂️ Struktur Repository
 
-CITATION
-==============================================
+```
+movie_recommendation/
+├── README.md                      # Dokumentasi utama
+├── movie_recommendation.py        # Script utama sistem rekomendasi
+├── experiment_summary.txt         # Ringkasan hasil eksperimen
+├── eda_analysis.png              # Visualisasi Exploratory Data Analysis
+├── actual_vs_predicted.png       # Scatter plot perbandingan prediksi
+├── feature_importance.png        # Grafik feature importance
+├── learning_curves.png           # Learning curves kedua model
+├── prediction_distribution.png   # Distribusi prediksi
+├── label_encoding.pkl            # Label encoder tersimpan
+├── scaler.pkl                    # StandardScaler tersimpan
+├── knn_model.pkl                 # Model KNN trained
+├── dt_model.pkl                  # Model Decision Tree trained
+├── model_comparison_results.csv  # Hasil perbandingan metrik
+├── model_comparison_results.png  # Visualisasi perbandingan
+├── u.data                        # Rating data (100,000 ratings)
+├── u.genre                       # Genre list
+├── u.info                        # Dataset information
+├── u.item                        # Movie information
+├── u.occupation                  # Occupation list
+├── u.user                        # User demographics
+├── u1.base - u5.base            # Training sets (cross-validation)
+├── u1.test - u5.test            # Testing sets (cross-validation)
+├── ua.base, ua.test             # Additional split A
+└── ub.base, ub.test             # Additional split B
+```
 
-To acknowledge use of the dataset in publications, please cite the 
-following paper:
+## 🚀 Quick Start
 
-F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets:
-History and Context. ACM Transactions on Interactive Intelligent
-Systems (TiiS) 5, 4, Article 19 (December 2015), 19 pages.
-DOI=http://dx.doi.org/10.1145/2827872
+### Prerequisites
 
+- Python 3.8 atau lebih tinggi
+- pip (Python package manager)
+- Git
 
-ACKNOWLEDGEMENTS
-==============================================
+### Instalasi
 
-Thanks to Al Borchers for cleaning up this data and writing the
-accompanying scripts.
+1. **Clone repository**
+```bash
+git clone https://github.com/brynnstilearning/movie_recommendation.git
+cd movie_recommendation
+```
 
-PUBLISHED WORK THAT HAS USED THIS DATASET
-==============================================
+2. **Buat virtual environment (recommended)**
+```bash
+python -m venv venv
 
-Herlocker, J., Konstan, J., Borchers, A., Riedl, J.. An Algorithmic
-Framework for Performing Collaborative Filtering. Proceedings of the
-1999 Conference on Research and Development in Information
-Retrieval. Aug. 1999.
+# Aktivasi di Windows
+venv\Scripts\activate
 
-FURTHER INFORMATION ABOUT THE GROUPLENS RESEARCH PROJECT
-==============================================
+# Aktivasi di Linux/Mac
+source venv/bin/activate
+```
 
-The GroupLens Research Project is a research group in the Department
-of Computer Science and Engineering at the University of Minnesota.
-Members of the GroupLens Research Project are involved in many
-research projects related to the fields of information filtering,
-collaborative filtering, and recommender systems. The project is lead
-by professors John Riedl and Joseph Konstan. The project began to
-explore automated collaborative filtering in 1992, but is most well
-known for its world wide trial of an automated collaborative filtering
-system for Usenet news in 1996.  The technology developed in the
-Usenet trial formed the base for the formation of Net Perceptions,
-Inc., which was founded by members of GroupLens Research. Since then
-the project has expanded its scope to research overall information
-filtering solutions, integrating in content-based methods as well as
-improving current collaborative filtering technology.
+3. **Install dependencies**
+```bash
+pip install -r requirements.txt
+```
 
-Further information on the GroupLens Research project, including
-research publications, can be found at the following web site:
-        
-        http://www.grouplens.org/
+4. **Dataset sudah included!**
+Dataset MovieLens 100K sudah tersedia di repository (file u.data, u.item, u.user, dll)
 
-GroupLens Research currently operates a movie recommender based on
-collaborative filtering:
+## 📊 Dataset
 
-        http://www.movielens.org/
+**MovieLens 100K** berisi:
+- **100,000 ratings** (skala 1-5)
+- **943 pengguna**
+- **1,682 film**
+- **Sparsity: 93.70%**
+- Periode: September 1997 - April 1998
 
-DETAILED DESCRIPTIONS OF DATA FILES
-==============================================
+### Struktur Data
 
-Here are brief descriptions of the data.
+**u.data** (ratings):
+```
+user_id | item_id | rating | timestamp
+```
 
-ml-data.tar.gz   -- Compressed tar file.  To rebuild the u data files do this:
-                gunzip ml-data.tar.gz
-                tar xvf ml-data.tar
-                mku.sh
+**u.item** (movies):
+```
+movie_id | title | release_date | video_release_date | IMDb_URL | genres
+```
 
-u.data     -- The full u data set, 100000 ratings by 943 users on 1682 items.
-              Each user has rated at least 20 movies.  Users and items are
-              numbered consecutively from 1.  The data is randomly
-              ordered. This is a tab separated list of 
-	         user id | item id | rating | timestamp. 
-              The time stamps are unix seconds since 1/1/1970 UTC   
+**u.user** (users):
+```
+user_id | age | gender | occupation | zip_code
+```
 
-u.info     -- The number of users, items, and ratings in the u data set.
+## 💻 Usage
 
-u.item     -- Information about the items (movies); this is a tab separated
-              list of
-              movie id | movie title | release date | video release date |
-              IMDb URL | unknown | Action | Adventure | Animation |
-              Children's | Comedy | Crime | Documentary | Drama | Fantasy |
-              Film-Noir | Horror | Musical | Mystery | Romance | Sci-Fi |
-              Thriller | War | Western |
-              The last 19 fields are the genres, a 1 indicates the movie
-              is of that genre, a 0 indicates it is not; movies can be in
-              several genres at once.
-              The movie ids are the ones used in the u.data data set.
+### 1. Menjalankan Sistem Rekomendasi Lengkap
 
-u.genre    -- A list of the genres.
+Script utama yang mengandung semua fungsionalitas:
 
-u.user     -- Demographic information about the users; this is a tab
-              separated list of
-              user id | age | gender | occupation | zip code
-              The user ids are the ones used in the u.data data set.
+```bash
+python movie_recommendation.py
+```
 
-u.occupation -- A list of the occupations.
+Script ini akan:
+- Load dan preprocess dataset MovieLens 100K
+- Melakukan Exploratory Data Analysis (EDA)
+- Training model KNN dan Decision Tree Regressor
+- Hyperparameter optimization dengan Grid Search CV
+- Evaluasi dan perbandingan kedua model
+- Generate visualisasi hasil
+- Save trained models (.pkl)
 
-u1.base    -- The data sets u1.base and u1.test through u5.base and u5.test
-u1.test       are 80%/20% splits of the u data into training and test data.
-u2.base       Each of u1, ..., u5 have disjoint test sets; this if for
-u2.test       5 fold cross validation (where you repeat your experiment
-u3.base       with each training and test set and average the results).
-u3.test       These data sets can be generated from u.data by mku.sh.
-u4.base
-u4.test
-u5.base
-u5.test
+### 2. Menggunakan Trained Models
 
-ua.base    -- The data sets ua.base, ua.test, ub.base, and ub.test
-ua.test       split the u data into a training set and a test set with
-ub.base       exactly 10 ratings per user in the test set.  The sets
-ub.test       ua.test and ub.test are disjoint.  These data sets can
-              be generated from u.data by mku.sh.
+```python
+import pickle
+import pandas as pd
 
-allbut.pl  -- The script that generates training and test sets where
-              all but n of a users ratings are in the training data.
+# Load trained models
+with open('knn_model.pkl', 'rb') as f:
+    knn_model = pickle.load(f)
 
-mku.sh     -- A shell script to generate all the u data sets from u.data.
+with open('dt_model.pkl', 'rb') as f:
+    dt_model = pickle.load(f)
+
+# Load preprocessors
+with open('scaler.pkl', 'rb') as f:
+    scaler = pickle.load(f)
+
+with open('label_encoding.pkl', 'rb') as f:
+    label_encoders = pickle.load(f)
+
+# Prediksi rating untuk user dan movie tertentu
+# (implementasi detail tergantung struktur data Anda)
+user_id = 196
+movie_id = 242
+
+# Untuk KNN (collaborative filtering)
+predicted_rating_knn = knn_model.predict(user_id, movie_id)
+
+# Untuk Decision Tree (dengan features)
+features = prepare_features(user_id, movie_id)  # sesuaikan dengan fungsi Anda
+predicted_rating_dt = dt_model.predict(features)
+
+print(f"KNN Prediction: {predicted_rating_knn:.2f}")
+print(f"Decision Tree Prediction: {predicted_rating_dt:.2f}")
+```
+
+### 3. Melihat Hasil Eksperimen
+
+Hasil eksperimen sudah tersimpan dalam repository:
+
+**Visualisasi:**
+- `eda_analysis.png` - Analisis eksplorasi data
+- `actual_vs_predicted.png` - Perbandingan prediksi vs aktual
+- `feature_importance.png` - Importance setiap feature
+- `learning_curves.png` - Learning curves kedua model
+- `prediction_distribution.png` - Distribusi prediksi
+- `model_comparison_results.png` - Perbandingan metrik
+
+**Data:**
+- `experiment_summary.txt` - Ringkasan hasil penelitian
+- `model_comparison_results.csv` - Metrik evaluasi dalam format CSV
+
+### 4. Cross-Validation
+
+Dataset sudah menyediakan 5-fold cross-validation splits:
+
+```python
+# Training set: u1.base, u2.base, u3.base, u4.base, u5.base
+# Testing set: u1.test, u2.test, u3.test, u4.test, u5.test
+
+# Untuk validasi tambahan
+# Set A: ua.base (training), ua.test (testing)
+# Set B: ub.base (training), ub.test (testing)
+```
+
+## 📈 Hasil Penelitian
+
+### Perbandingan Metrik
+
+| Metrik | KNN | Decision Tree | Pemenang |
+|--------|-----|---------------|----------|
+| **Precision** | 0.8332 | **0.8393** | DT ✓ |
+| **Recall** | 0.3500 | **0.3949** | DT ✓ |
+| **F1-Score** | 0.4929 | **0.5371** | DT ✓ |
+| **RMSE** | 0.9565 | **0.9416** | DT ✓ |
+| **MAE** | 0.7615 | **0.7428** | DT ✓ |
+| **Training Time** | **12.58s** | 18.12s | KNN ✓ |
+
+### Hyperparameter Optimal
+
+**KNN:**
+- n_neighbors: 30
+- weights: 'distance'
+- metric: 'euclidean'
+
+**Decision Tree Regressor:**
+- max_depth: 10
+- min_samples_split: 20
+- min_samples_leaf: 5
+- criterion: 'squared_error'
+
+### Feature Importance (Top 5)
+
+1. **movie_avg_rating**: 55.43%
+2. **user_avg_rating**: 36.13%
+3. **user_id**: 2.29%
+4. **age**: 1.81%
+5. **movie_id**: 1.29%
+
+## 🔬 Metodologi
+
+Penelitian menggunakan framework **CRISP-DM**:
+
+1. **Business Understanding**: Identifikasi masalah information overload
+2. **Data Understanding**: EDA pada MovieLens 100K
+3. **Data Preparation**: 
+   - Feature engineering (27 fitur)
+   - Train-test split (80-20)
+   - Feature scaling dengan StandardScaler
+4. **Modeling**: 
+   - Grid Search Cross-Validation (5-fold)
+   - Hyperparameter optimization
+5. **Evaluation**: 
+   - Metrik: Precision, Recall, F1-Score, RMSE, MAE
+   - Threshold relevansi: rating ≥ 4
+6. **Deployment**: Prototipe web application
+
+## 📚 Dependencies
+
+Lihat `requirements.txt` untuk daftar lengkap. Dependencies utama:
+
+```txt
+numpy>=1.21.0
+pandas>=1.3.0
+scikit-learn>=0.24.0
+matplotlib>=3.4.0
+seaborn>=0.11.0
+scipy>=1.7.0
+```
+
+Jika belum ada `requirements.txt`, buat dengan:
+
+```bash
+pip freeze > requirements.txt
+```
+
+Atau gunakan dependencies minimal:
+
+```bash
+pip install numpy pandas scikit-learn matplotlib seaborn scipy
+```
+
+## 🤝 Contributing
+
+Kontribusi sangat diterima! Silakan:
+
+1. Fork repository ini
+2. Buat branch baru (`git checkout -b feature/AmazingFeature`)
+3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buat Pull Request
+
+## 📝 Citation
+
+Jika menggunakan kode ini dalam penelitian, mohon cite:
+
+```bibtex
+@misc{anang2025movie,
+  author = {Febriananto, Nur Muhammad Anang},
+  title = {Analisis Kinerja Algoritma K-Nearest Neighbors dan Decision Tree Regressor untuk Sistem Rekomendasi Film Sederhana},
+  year = {2025},
+  institution = {UIN Maulana Malik Ibrahim Malang},
+  url = {https://github.com/brynnstilearning/movie_recommendation}
+}
+```
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## 👤 Author
+
+**Nur Muhammad Anang Febriananto**
+- NIM: 230605110103
+- Universitas: UIN Maulana Malik Ibrahim Malang
+- Jurusan: Teknik Informatika
+- Email: 230605110103@student.uin-malang.ac.id
+
+## 🙏 Acknowledgments
+
+- [GroupLens Research](https://grouplens.org/) untuk dataset MovieLens 100K
+- [MovieLens Dataset](https://www.kaggle.com/datasets/prajitdatta/movielens-100k-dataset) di Kaggle
+- Prof. Dr. H.MUHAMMAD FAISAL,S.Kom., M.T dan Fakultas Sains dan Teknologi UIN Malang
+- Komunitas open-source Python dan scikit-learn
+
+## 📞 Contact & Support
+
+Untuk pertanyaan, saran, atau issue:
+- WA: 081252696114
+- Email: 230605110103@student.uin-malang.ac.id
+
+---
+
+## 🔗 Links
+
+- [Laporan Penelitian Lengkap](docs/laporan_penelitian.pdf)
+- [Dataset MovieLens 100K](https://grouplens.org/datasets/movielens/100k/)
+- [Dokumentasi API](docs/API.md)
+- [Changelog](CHANGELOG.md)
