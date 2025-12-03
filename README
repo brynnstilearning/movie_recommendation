@@ -26,7 +26,6 @@ Penelitian ini mengimplementasikan dan membandingkan dua algoritma machine learn
 - ✅ Evaluasi menggunakan 6 metrik (Precision, Recall, F1-Score, RMSE, MAE, Training Time)
 - ✅ Visualisasi hasil (confusion matrix, learning curves, feature importance)
 - ✅ Grid Search Cross-Validation untuk optimasi parameter
-- ✅ Prototipe web application dengan Flask
 
 ## 🗂️ Struktur Repository
 
