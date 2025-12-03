@@ -1,0 +1,48 @@
+
+EXPERIMENT COMPLETED SUCCESSFULLY!
+
+Dataset Information:
+- Total Ratings: 100,000
+- Unique Users: 943
+- Unique Movies: 1,682
+- Sparsity: 93.70%
+
+Data Split:
+- Training Set: 80,000 samples (80.0%)
+- Testing Set: 20,000 samples (20.0%)
+
+K-NEAREST NEIGHBORS (KNN):
+- Best Parameters: {'metric': 'euclidean', 'n_neighbors': 30, 'weights': 'distance'}
+- Training Time: 12.58 seconds
+- RMSE: 0.9565
+- MAE: 0.7615
+- Precision: 0.8332
+- Recall: 0.3500
+- F1-Score: 0.4929
+
+DECISION TREE REGRESSOR:
+- Best Parameters: {'criterion': 'squared_error', 'max_depth': 10, 'min_samples_leaf': 5, 'min_samples_split': 20}
+- Training Time: 18.12 seconds
+- RMSE: 0.9416
+- MAE: 0.7428
+- Precision: 0.8393
+- Recall: 0.3949
+- F1-Score: 0.5371
+
+WINNER (Based on RMSE):
+Decision Tree Regressor performs better with RMSE of 0.9416
+
+Output Files Generated:
+1. eda_analysis.png - Exploratory Data Analysis visualizations
+2. model_comparison_results.png - Model performance comparison
+3. model_comparison_results.csv - Metrics comparison table
+4. learning_curves.png - Learning curve analysis
+5. feature_importance.png - Feature importance (Decision Tree)
+6. prediction_distribution.png - Prediction distributions
+7. actual_vs_predicted.png - Scatter plots
+8. knn_model.pkl - Trained KNN model
+9. dt_model.pkl - Trained Decision Tree model
+10. scaler.pkl - Feature scaler
+11. label_encoders.pkl - Label encoders
+
+Experiment Duration: 2025-11-14 12:48:36
